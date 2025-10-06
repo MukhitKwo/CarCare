@@ -1,3 +1,7 @@
-# CarCare
+# CarCare (Decidir um nome)
 
-Projeto final idk
+Frontend: React e TailwindCSS
+Midleware: ?
+Backend: Django
+Database: Firebase e/ou Supabase
+
