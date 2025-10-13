@@ -16,9 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from api.views import hello
+from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/hello/', hello),
+    path('api/', include('api.urls')),            # API endpoints
+    path('test/', include('frontend_test.urls')), # temporary frontend testing
 ]
