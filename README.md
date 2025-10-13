@@ -1,6 +1,6 @@
-# CarCare (Decidir um nome)
+# Wrenchly
 
-Frontend: React e TailwindCSS
-Backend: Django
+Frontend: React e TailwindCSS (Daniel, Pablo e Rui)
+Backend: Django (António e Guilherme)
 Database: Firebase e/ou Supabase
 
