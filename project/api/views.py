@@ -1,5 +1,5 @@
-# from django.http import JsonResponse
-# from django.shortcuts import render
+from django.http import JsonResponse
+from django.shortcuts import render
 
 # # Create your views here.
 # def hello(request):
@@ -11,6 +11,8 @@ from .models import Item
 from .serializers import ItemSerializer
 from .utils import process_values
 
+def hello_world(request):
+    return JsonResponse({"message":"Hello from Django brother"})
 
 class ProcessItemView(APIView):
     def post(self, request):
