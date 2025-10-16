@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 # # Create your views here.
 def hello(request):
-    return JsonResponse({'message': 'COCKS '})
+    return JsonResponse({'message': 'Estabelecido Django + React '})
 
 # from rest_framework.views import APIView
 # from rest_framework.response import Response
