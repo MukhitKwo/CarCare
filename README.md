@@ -36,7 +36,7 @@ pip install -r requirements.txt
 npm install
 ```
 
-3. **Executar o projeto**
+2. **Executar o projeto**
 
 * Para executar **toda a aplicação** (frontend + backend):
 

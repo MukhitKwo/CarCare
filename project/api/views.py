@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 # # Create your views here.
 def hello(request):
-    return JsonResponse({'message': 'Isto é uma mensage retornada por api.views.hello'})
+    return JsonResponse({'message': 'Isto é uma mensage retornada por api.views.hello ola'})
 
 # from rest_framework.views import APIView
 # from rest_framework.response import Response
