@@ -26,8 +26,9 @@ SECRET_KEY = 'django-insecure-8ep*xe&n1v^foy1872lul54@6ki8+3dp+8lajmtf1+m02nmuu5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1'] #apenas para localhost
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']  # ! para conectar o proxy do react ao django
 
+os.environ["DJANGO_RUNSERVER_HIDE_WARNING"] = "true"  # ! PARA PARAR DE MOSTAR "WARNING THIS IS DEVELOPMENT SERVER"
 
 # Application definition
 
