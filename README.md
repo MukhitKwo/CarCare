@@ -11,7 +11,7 @@ Wrenchly é uma aplicação web mobile-first para manutenção de veículos. Per
 * **Daniel** – Frontend
 * **Pablo** – Frontend
 
-**Stack Tecnológica**
+**Stack Tecnológico**
 
 * **Backend:** Django
 * **Frontend:** React + TailwindCSS
@@ -22,14 +22,7 @@ Wrenchly é uma aplicação web mobile-first para manutenção de veículos. Per
 
 Para executar o projeto, siga os passos abaixo:
 
-1. **Clonar o repositório**
-
-```bash
-git clone <URL_DO_REPOSITORIO>
-cd Wrenchly
-```
-
-2. **Instalar dependências**
+1. **Instalar dependências**
 
 * Backend (Django) **?**:
 
@@ -57,6 +50,6 @@ npm run project
 npm run backend
 ```
 
-###### adiconar mais no futuro
+##### adiconar mais no futuro
 
 
