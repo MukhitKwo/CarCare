@@ -14,25 +14,24 @@ Wrenchly é uma aplicação web mobile-first para manutenção de veículos. Per
 **Stack Tecnológico**
 
 * **Backend:** Django
-* **Frontend:** React + TailwindCSS
-* **Base de Dados:** (a definir: Firebase, Supabase ou Postgres)
+* **Frontend:** React + Axios + TailwindCSS
+* **Base de Dados:** Supabase
 
 
 ### Setup / Run
 
-Para executar o projeto, siga os passos abaixo:
-
 1. **Instalar dependências**
 
-* Backend (Django) **?**:
+* Backend (Django):
 
 ```bash
-pip install -r requirements.txt
+uv sync
 ```
 
-* Frontend (React + TailwindCSS) **?**:
+* Frontend (React + TailwindCSS):
 
 ```bash
+cd project/frontend
 npm install
 ```
 

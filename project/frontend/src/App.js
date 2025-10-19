@@ -1,22 +1,28 @@
-import React, { useEffect, useState } from "react";
-import Ola from './ola';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-
-function App() {
-  const [message, setMessage] = useState("");
+function CarList() {
+  const [cars, setCars] = useState([]);
 
   useEffect(() => {
-    fetch("/api/hello/")  // relative path!
-      .then((res) => res.json())
-      .then((data) => setMessage(data.message))
-      .catch((err) => console.error(err));
+    axios.get('/api/carinfo/')
+      .then(response => {
+        setCars(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }, []);
 
   return (
-    <div className="App">
-      <h1>{message || "Loading..."}</h1>
+    <div>
+      {cars.map(car => (
+        <div key={car.id}>
+          {car.brand} {car.model} - {car.year}
+        </div>
+      ))}
     </div>
   );
 }
 
-export default App;
+export default CarList;
