@@ -1,6 +1,6 @@
 # Wrenchly
 
-**Descrição**
+**Descrição:**
 Wrenchly é uma aplicação web mobile-first para manutenção de veículos. Permite aos utilizadores adicionar os seus carros, registar reparações e acompanhar o histórico de manutenção. A app inclui também um sistema de previsão que identifica problemas comuns/crónicos do veículo e fornece lembretes para troca de óleo, seguros e outras manutenções periódicas. Além disso, os utilizadores podem procurar veículos com base em características específicas para encontrar o carro que melhor se adapta às suas necessidades. Futuramente, a aplicação poderá ser migrada para **React Native** para suporte nativo em dispositivos móveis.
 
 **Colaboradores**
@@ -14,7 +14,7 @@ Wrenchly é uma aplicação web mobile-first para manutenção de veículos. Per
 **Stack Tecnológico**
 
 * **Backend:** Django
-* **Frontend:** React + Axios + TailwindCSS
+* **Frontend:** React + TailwindCSS
 * **Base de Dados:** Supabase
 
 
