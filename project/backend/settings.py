@@ -20,9 +20,9 @@ SECRET_KEY = 'django-insecure-8ep*xe&n1v^foy1872lul54@6ki8+3dp+8lajmtf1+m02nmuu5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']  # ! para conectar o proxy do react ao django
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']  # ! para permitir o proxy do react
 
-os.environ["DJANGO_RUNSERVER_HIDE_WARNING"] = "true"  # ! PARA PARAR DE MOSTAR "WARNING THIS IS DEVELOPMENT SERVER"
+# os.environ["DJANGO_RUNSERVER_HIDE_WARNING"] = "true"  # ! PARA PARAR DE MOSTAR "WARNING THIS IS DEVELOPMENT SERVER"
 
 # Application definition
 
@@ -52,7 +52,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

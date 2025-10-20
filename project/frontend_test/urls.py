@@ -1,6 +1,6 @@
 from django.urls import path
-from frontend_test.views import display_values
+from .views import hello
 
 urlpatterns = [
-    path('', display_values, name='display-values'),
+    path('car/', hello, name='display-values'),
 ]

@@ -1,15 +1,28 @@
 from django.shortcuts import render
+import requests
+from .forms import CarInfoForm
 
-# Create your views here.
 
-from api.utils import process_values  # reuse API logic
-from api.models import Item  # importar o modelo Item
+def hello(request):
 
-def display_values(request):
-    
-    # Item.objects acede à tabela Items na base de dados
-    # .all() diz para devolver todas as linhas da tabela
-    # order_by('-id) ordernar por id decrescente ( '-' diz recente -> antigo)
-    processed = Item.objects.all().order_by('-id')
+    if request.method == "POST":
+        form = CarInfoForm(request.POST)
 
-    return render(request, 'frontend_test/display.html', {'processed': processed})
+        if form.is_valid():
+            data = form.cleaned_data
+
+            data['brand'] = data['brand'].capitalize()
+            data['model'] = data['model'].capitalize()
+
+            print("Data:", data)
+
+            res = requests.post('http://127.0.0.1:8001/api/carinfo/', json=data)
+
+            if res.status_code == 201:
+                print("Status: good")
+            else:
+                print("Status: bad")
+    else:
+        form = CarInfoForm()
+
+    return render(request, 'display.html', {'form': form})
