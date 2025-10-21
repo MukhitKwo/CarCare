@@ -4,9 +4,13 @@
 	"description": "Frontend: React e TailwindCSS (Daniel, Pablo e Rui)\r Backend: Django (António e Guilherme)\r Database: Firebase e/ou Supabase",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
 		"project": "cd project/frontend && npm run start-project",
-		"backend": "cd project && uv run manage.py runserver 8001"
+		"p": "npm run project",
+		"backend": "cd project && uv run manage.py runserver 8001",
+		"b": "npm run backend",
+		"frontend": "cd project/frontend && npm start",
+		"f": "npm run frontend",
+		"dep": "uv sync && cd project/frontend && npm install"
 	},
 	"repository": {
 		"type": "git",

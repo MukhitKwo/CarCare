@@ -32,7 +32,7 @@ def showCar(request):
         res = requests.get('http://127.0.0.1:8001/api/carinfo/', timeout=5)
         res.raise_for_status()
         cars = res.json()
-        print(cars)
+        # print(cars)
     except requests.RequestException as e:
         print("Request error:", e)
         cars = []
