@@ -3,12 +3,18 @@ from pathlib import Path
 from dotenv import load_dotenv
 import os
 
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+
 # ! para carregar cenas do .env
 dotenv_path = Path(__file__).resolve().parents[2] / ".env"
 load_dotenv(dotenv_path=dotenv_path)
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+sb_user = os.getenv("SB_USER")
+sb_password = os.getenv("SB_PASSWORD")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 
 # Quick-start development settings - unsuitable for production
@@ -22,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']  # ! para permitir o proxy do react
 
-# os.environ["DJANGO_RUNSERVER_HIDE_WARNING"] = "true"  # ! PARA PARAR DE MOSTAR "WARNING THIS IS DEVELOPMENT SERVER"
+os.environ["DJANGO_RUNSERVER_HIDE_WARNING"] = "true"  # ! PARA PARAR DE MOSTAR "WARNING THIS IS DEVELOPMENT SERVER"
 
 # Application definition
 
@@ -74,13 +80,14 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
-        'USER': os.getenv("SB_USER"),
-        'PASSWORD': os.getenv("SB_PASSWORD"),
+        'USER': sb_user,
+        'PASSWORD': sb_password,
         'HOST': 'aws-1-eu-west-1.pooler.supabase.com',
         'PORT': '6543',
         'OPTIONS': {
             'sslmode': 'require',
         },
+        'CONN_MAX_AGE': 60,
     }
 }
 

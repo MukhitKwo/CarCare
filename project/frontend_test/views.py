@@ -9,37 +9,48 @@ def addCar(request):
         form = CarInfoForm(request.POST)
 
         if form.is_valid():
-            data = form.cleaned_data
+            dataForm = form.cleaned_data
 
-            data['brand'] = data['brand'].capitalize()
-            data['model'] = data['model'].capitalize()
+            brand = dataForm["brand"].capitalize()
+            model = dataForm["model"].capitalize()
+            year = dataForm["year"]
+            car_name = f"{brand} {model} {year}"
 
-            print("Data:", data)
+            cronicIssues = requests.get(
+                'http://127.0.0.1:8001/api/cronicIssues/',
+                params={'car': car_name}
+            )
+
+            data = {
+                "brand": brand,
+                "model": model,
+                "year": year,
+                "cronic": cronicIssues.json()
+            }
+            # print("Data:", data)
 
             res = requests.post('http://127.0.0.1:8001/api/carinfo/', json=data)
 
-            if res.status_code == 201:
-                print("Status: good")
+            if cronicIssues.status_code == 200:
+                print("Cronic Issues Status: 200 (Gemini data retrieved)")
             else:
-                print("Status: bad")
+                print(f"Cronic Issues Status: Failed ({cronicIssues.status_code})")
+
+            if res.status_code == 201:
+                print("Car Info Status: 201 (Database received data)")
+            else:
+                print(f"Car Info Status: Failed ({res.status_code})")
+
     else:
         form = CarInfoForm()
 
     return render(request, 'addCars.html', {'form': form})
 
-def showCar(request):
-    try:
-        res = requests.get('http://127.0.0.1:8001/api/carinfo/', timeout=5)
-        res.raise_for_status()
-        cars = res.json()
-        # print(cars)
-    except requests.RequestException as e:
-        print("Request error:", e)
-        cars = []
-    except ValueError as e:
-        print("JSON decode error:", e)
-        cars = []
 
-    
+def showCar(request):
+
+    res = requests.get('http://127.0.0.1:8001/api/carinfo/')
+    res.raise_for_status()
+    cars = res.json()
 
     return render(request, 'showCars.html', {'cars': cars})

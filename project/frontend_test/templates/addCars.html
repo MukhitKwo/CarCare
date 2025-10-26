@@ -5,9 +5,17 @@
 	</head>
 	<body>
 		<h1>Adicionar Carro</h1>
-		<form method="post">
+		<form id="addCarForm" method="post">
 			{% csrf_token %} {{ form.as_p }}
 			<button type="submit">Send</button>
 		</form>
+		<div id="loading" style="display:none;">Loading...</div>
+
+		<script>
+			const form = document.getElementById("addCarForm");
+			form.addEventListener("submit", () => {
+				document.getElementById("loading").style.display = "block";
+			});
+		</script>
 	</body>
 </html>
