@@ -22,17 +22,8 @@ Wrenchly é uma aplicação web mobile-first para manutenção de veículos. Per
 
 1. **Instalar dependências**
 
-* Backend (Django):
-
 ```bash
-uv sync
-```
-
-* Frontend (React + TailwindCSS):
-
-```bash
-cd project/frontend
-npm install
+npm run dep
 ```
 
 2. **Executar o projeto**
@@ -41,14 +32,25 @@ npm install
 
 ```bash
 npm run project
+# ou
+npm run p
 ```
 
 * Para executar **apenas o backend** (Django):
 
 ```bash
 npm run backend
+# ou
+npm run b
 ```
 
-##### adiconar mais no futuro
+* Para executar **apenas o frontend** (React):
+
+```bash
+npm run frontend
+# ou
+npm run f
+```
+
 
 
