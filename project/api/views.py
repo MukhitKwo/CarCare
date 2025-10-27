@@ -1,9 +1,9 @@
 from django.http import JsonResponse
 from rest_framework import viewsets
-from .models import *
-from .serializers import *
+from .models import CarInfo
+from .serializers import CarInfoSerializer
 from django.http import JsonResponse
-from .gemini_api import CarCronicIssues
+from .gemini import geminiCronicIssues
 
 # # Create your views here.
 
@@ -20,7 +20,7 @@ class CarInfoViewSet(viewsets.ModelViewSet):
 def getCarCronicIssues(request):
     car = request.GET.get("car")
     # print("Car:", car)
-    data = CarCronicIssues(car)
+    data = geminiCronicIssues(car)
     if data is None:
         return JsonResponse({"error": "Failed to get car issues"}, status=500)
     return JsonResponse(data, safe=False, json_dumps_params={"ensure_ascii": False, "indent": 2})

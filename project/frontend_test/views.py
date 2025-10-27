@@ -14,11 +14,11 @@ def addCar(request):
             brand = dataForm["brand"].capitalize()
             model = dataForm["model"].capitalize()
             year = dataForm["year"]
-            car_name = f"{brand} {model} {year}"
+            car_model = f"{brand} {model} {year}"
 
             cronicIssues = requests.get(
                 'http://127.0.0.1:8001/api/cronicIssues/',
-                params={'car': car_name}
+                params={'car': car_model}
             )
 
             data = {

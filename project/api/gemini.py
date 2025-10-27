@@ -11,7 +11,7 @@ client = genai.Client(api_key=settings.GEMINI_API_KEY)
 
 # TODO fix cache not saving betwen project restarts
 
-def CarCronicIssues(car_model: str):
+def geminiCronicIssues(car_model: str):
 
     # cache
     car_safe = re.sub(r'[^a-zA-Z0-9]', '_', car_model)
