@@ -3,5 +3,5 @@ from .models import *
 
 class CarInfoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CarInfo
+        model = Carro
         fields = '__all__'

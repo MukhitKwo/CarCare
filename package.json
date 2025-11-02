@@ -10,7 +10,8 @@
 		"b": "npm run backend",
 		"frontend": "cd project/frontend && npm start",
 		"f": "npm run frontend",
-		"dep": "uv sync && cd project/frontend && npm install"
+		"dep": "uv sync && cd project/frontend && npm install",
+		"mig": "cd project && uv run manage.py makemigrations && uv run manage.py migrate"
 	},
 	"repository": {
 		"type": "git",

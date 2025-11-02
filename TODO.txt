@@ -1,2 +1,0 @@
-salvar o cache dos pedidos ao gemini entre projects restarts
-receber json do gemini nas views depois de carregar pagina (usar celery?)

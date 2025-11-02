@@ -1,0 +1,6 @@
+salvar o cache dos pedidos ao gemini entre projects restarts
+add update and delete to addcars()
+check if database is online when starting (display error if not instant of crash)
+add webscraping to when searching for my car
+get guilherme's ui for frontend_test
+create admin user
