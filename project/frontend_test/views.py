@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import requests
 from .forms import CarInfoForm
+from utils.res_status import *
 
 
 def addCar(request):
@@ -12,8 +13,11 @@ def addCar(request):
         if form.is_valid():
 
             carInfo = form.cleaned_data
-            res = requests.post('http://127.0.0.1:8001/api/adicionarCarro/', json=carInfo)
-            print(f"AdicionarCarro Status: {res.status_code}")
+            carInfo["garagem"] = "1"
+
+            res = requests.post('http://127.0.0.1:8001/api/tabelaCarro/', json=carInfo)
+            print_status(res)
+            print(res.text)
     else:
         form = CarInfoForm()
 
@@ -22,8 +26,9 @@ def addCar(request):
 
 def showCar(request):
 
-    res = requests.get('http://127.0.0.1:8001/api/carinfo/')
-    res.raise_for_status()
+    res = requests.get('http://127.0.0.1:8001/api/tabelaCarro/1/')
+    print_status(res)
     cars = res.json()
+    
 
     return render(request, 'showCars.html', {'cars': cars})

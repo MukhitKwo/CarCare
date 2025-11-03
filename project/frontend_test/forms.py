@@ -1,57 +1,53 @@
 from django import forms
 
+
 class CarInfoForm(forms.Form):
-    car_model = forms.CharField(label='Car Model', max_length=100)
+
+    modelo = forms.CharField(label="Modelo", max_length=100)
 
     FUEL_CHOICES = (
-        ('Gasoline', 'Gasoline'),
-        ('Diesel', 'Diesel'),
-        ('Hybrid', 'Hybrid'),
-        ('Electric', 'Electric'),
-        ('Other', 'Other'),
+        ('Gasolina', 'Gasolina'),
+        ('Gasoleo', 'Gasoleo'),
+        ('Hibrido', 'Hibrido'),
+        ('Eletrico', 'Eletrico'),
+        ('Outro', 'Outro'),
     )
-    fuel = forms.ChoiceField(label='Fuel', choices=FUEL_CHOICES)
+    combustivel = forms.ChoiceField(label="Combustivel", choices=FUEL_CHOICES)
 
     tdi = forms.FloatField(label='TDI (if Diesel)', required=False)
 
-    horsepower = forms.IntegerField(label='Horsepower (optional)', required=False, min_value=0)
+    cavalos = forms.IntegerField(label="Cavalos", help_text="Opcional", required=False, min_value=0)
 
     TRANSMISSION_CHOICES = (
         ('Manual', 'Manual'),
-        ('Automatic', 'Automatic'),
-        ('Semi-automatic', 'Semi-automatic'),
+        ('Automatico', 'Automatico'),
+        ('Semi-automatico', 'Semi-automatico'),
         ('CVT', 'CVT'),
-        ('Other', 'Other'),
+        ('Outro', 'Outro'),
     )
-    transmission = forms.ChoiceField(label='Transmission', choices=TRANSMISSION_CHOICES)
+    transmissao = forms.ChoiceField(label="Transmissao", choices=TRANSMISSION_CHOICES)
 
-    mileage = forms.IntegerField(label='Mileage', min_value=0)
+    kilometragem = forms.IntegerField(label="Kilometragem", min_value=0)
 
-    year_produced = forms.IntegerField(label='Year produced', min_value=1886, max_value=9999)
+    ano_produzido = forms.IntegerField(label="Ano Produzido", min_value=0)
 
-    vin = forms.CharField(label='VIN (optional)', max_length=17, required=False)
-
-    BODY_TYPE_CHOICES = (
-        ('Sedan', 'Sedan'),
+    BODY_TYPE_CHOICES = [
+        ('Seda', 'Sedã'),
         ('Hatchback', 'Hatchback'),
         ('SUV', 'SUV'),
-        ('Coupe', 'Coupe'),
-        ('Convertible', 'Convertible'),
-        ('Wagon', 'Wagon'),
+        ('Cope', 'Cupê'),
+        ('Conversivel', 'Conversível'),
+        ('Carrinha', 'Carrinha'),
         ('Van', 'Van'),
         ('Pickup', 'Pickup'),
-        ('Other', 'Other'),
+        ('Outro', 'Outro'),
+    ]
+    tipo_corpo = forms.ChoiceField(
+        label="Tipo Corpo",
+        choices=BODY_TYPE_CHOICES,
+        required=False
     )
-    body_type = forms.ChoiceField(label='Body type', choices=BODY_TYPE_CHOICES, required=False)
 
-    registration_number = forms.CharField(label='Registration number (optional)', max_length=50, required=False)
+    vin = forms.CharField(label="VIN", help_text="Opcional", max_length=17, required=False)
 
-    def clean(self):
-        cleaned_data = super().clean()
-        fuel = cleaned_data.get('fuel')
-        tdi = cleaned_data.get('tdi')
-
-        if fuel == 'Diesel' and tdi is None:
-            self.add_error('tdi', 'TDI is required for diesel cars.')
-
-        return cleaned_data
+    matricula = forms.CharField(label="Matricula", help_text="Opcional", max_length=8, required=False)

@@ -22,7 +22,7 @@ class Garagem(models.Model):
 
     garagem_id = models.AutoField(primary_key=True)  # type: ignore
 
-    user_id = models.ForeignKey(Utilizador, on_delete=models.CASCADE)  # type: ignore #! chave estrangeira
+    user = models.ForeignKey(Utilizador, on_delete=models.CASCADE)  # type: ignore #! chave estrangeira
 
     nome = models.CharField("Nome", max_length=100)  # type: ignore
 
@@ -34,7 +34,7 @@ class Carro(models.Model):
 
     carro_id = models.AutoField(primary_key=True)  # type: ignore
 
-    garagem_id = models.ForeignKey(Garagem, on_delete=models.CASCADE)  # type: ignore #! chave estrangeira
+    garagem = models.ForeignKey(Garagem, on_delete=models.CASCADE)  # type: ignore #! chave estrangeira
 
     modelo = models.CharField("Modelo", max_length=100)  # type: ignore
 
@@ -47,7 +47,7 @@ class Carro(models.Model):
     )
     combustivel = models.CharField("Combustivel", max_length=20, choices=FUEL_CHOICES)  # type: ignore
 
-    tdi = models.DecimalField(max_digits=3, decimal_places=2)  # type: ignore
+    tdi = models.DecimalField(max_digits=3, decimal_places=2, blank=True, null=True)  # type: ignore
 
     cavalos = models.PositiveIntegerField("Cavalos", blank=True, null=True)  # type: ignore
 
@@ -90,7 +90,7 @@ class Manutenção(models.Model):
 
     registro_id = models.AutoField(primary_key=True)  # type: ignore
 
-    carro_id = models.ForeignKey(Carro, on_delete=models.CASCADE)  # type: ignore #! chave estrangeira
+    carro = models.ForeignKey(Carro, on_delete=models.CASCADE)  # type: ignore #! chave estrangeira
 
     nome = models.CharField("Nome", max_length=100)  # type: ignore
 
@@ -110,7 +110,7 @@ class Cronico(models.Model):
 
     problema_id = models.AutoField(primary_key=True)  # type: ignore
 
-    carro_id = models.ForeignKey(Carro, on_delete=models.CASCADE)  # type: ignore #! chave estrangeira
+    carro = models.ForeignKey(Carro, on_delete=models.CASCADE)  # type: ignore #! chave estrangeira
 
     nome = models.CharField("Nome", max_length=100)  # type: ignore
 
