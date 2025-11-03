@@ -86,7 +86,7 @@ class Carro(models.Model):
         return f"{self.modelo} {self.combustivel} ({self.transmissao})"
 
 
-class Manutenção(models.Model):
+class Manutencao(models.Model):
 
     registro_id = models.AutoField(primary_key=True)  # type: ignore
 

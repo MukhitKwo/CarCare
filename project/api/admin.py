@@ -5,5 +5,5 @@ from .models import *
 admin.site.register(Utilizador)
 admin.site.register(Garagem)
 admin.site.register(Carro)
-admin.site.register(Manutenção)
+admin.site.register(Manutencao)
 admin.site.register(Cronico)
