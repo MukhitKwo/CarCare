@@ -1,7 +1,7 @@
 from django import forms
 
 
-class CarInfoForm(forms.Form):
+class createCarroForm(forms.Form):
 
     modelo = forms.CharField(label="Modelo", max_length=100)
 
@@ -51,3 +51,11 @@ class CarInfoForm(forms.Form):
     vin = forms.CharField(label="VIN", help_text="Opcional", max_length=17, required=False)
 
     matricula = forms.CharField(label="Matricula", help_text="Opcional", max_length=8, required=False)
+
+
+class getCarroForm(forms.Form):
+
+    id = forms.IntegerField(label="Id Carro", required=False)
+
+class updateCarroFrom(forms.Form):
+    pass

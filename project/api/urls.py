@@ -8,6 +8,6 @@ router.register(r'carinfo', CarroViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('cronicIssues/', getCarCronicIssues),
-    path('tabelaCarro/', tabelaCarro),  # POST
-    path('tabelaCarro/<int:carro_id>/', tabelaCarro),  # GET, PUT, DELETE
+    path('tabelaCarro/', tabelaCarro),  # POST, GET ALL
+    path('tabelaCarro/<int:id>/', tabelaCarro),  # GET, PUT, DELETE
 ]
