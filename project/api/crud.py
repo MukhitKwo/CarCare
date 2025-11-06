@@ -2,7 +2,7 @@ from django.http import JsonResponse
 import json
 
 
-def crud(request, model, serializer, pk_id, id=None):
+def crud(request, model, serializer, id=None):
     """
     O CRUD deteta automaticamente o tipo de request e retorna o json correspondente
     """
@@ -11,13 +11,13 @@ def crud(request, model, serializer, pk_id, id=None):
         return create_object(request, serializer)  # valores necessarios para o POST
 
     elif request.method == "GET":
-        return get_object(model, serializer, pk_id, id)  # valores necessarios para o GET
+        return get_object(model, serializer, id)  # valores necessarios para o GET
 
     elif request.method == "PUT":
-        return update_object(request, model, serializer, pk_id, id)  # valores necessarios para o PUT
+        return update_object(request, model, serializer, id)  # valores necessarios para o PUT
 
     elif request.method == "DELETE":
-        return delete_object(model, pk_id, id)  # valores necessarios para o DELETE
+        return delete_object(model, id)  # valores necessarios para o DELETE
 
     return JsonResponse({"error": "Method not allowed"}, status=405)
 
@@ -35,11 +35,12 @@ def create_object(request, Serializer):
     return JsonResponse(serializer.errors, status=400)  # erros de validação
 
 
-def get_object(Model, Serializer, pk_id, id):
+def get_object(Model, Serializer, id):
 
     if id:  # se foi passado um id, significa que quer um objeto específico
 
         try:
+            pk_id = Model._meta.pk.name
             obj = Model.objects.get(**{pk_id: id})  # procura o objeto com a chave primária correta
         except Model.DoesNotExist:
             return JsonResponse({"error": f"{Model.__name__} not found"}, status=404)  # não encontrou
@@ -47,17 +48,18 @@ def get_object(Model, Serializer, pk_id, id):
         serializer = Serializer(obj)  # converte o objeto para json
         return JsonResponse(serializer.data, status=200)  # devolve o json
 
-    objects = Model.objects.all()  # busca todos os registos
+    objects = Model.objects.all()[:100] # busca todos os primeiros 100 registos
     serializer = Serializer(objects, many=True)  # converte todos para json
     return JsonResponse(serializer.data, safe=False, status=200)  # devolve lista de jsons
 
 
-def update_object(request, Model, Serializer, pk_id, id):
+def update_object(request, Model, Serializer, id):
 
     if not id:  # sem id não há como atualizar
-        return JsonResponse({"error": f"{pk_id} required"}, status=400)
+        return JsonResponse({"error": f"Primary key required"}, status=400)
 
     try:
+        pk_id = Model._meta.pk.name
         obj = Model.objects.get(**{pk_id: id})  # procura o objeto
     except Model.DoesNotExist:
         return JsonResponse({"error": f"{Model.__name__} not found"}, status=404)
@@ -71,12 +73,13 @@ def update_object(request, Model, Serializer, pk_id, id):
         return JsonResponse(serializer.errors, status=400)  # erro de validação
 
 
-def delete_object(Model, pk_id, id):
+def delete_object(Model, id):
 
     if not id:  # sem id não há o que apagar
-        return JsonResponse({"error": f"{pk_id} required"}, status=400)
+        return JsonResponse({"error": f"Primary key required"}, status=400)
 
     try:
+        pk_id = Model._meta.pk.name
         obj = Model.objects.get(**{pk_id: id})  # procura o objeto
     except Model.DoesNotExist:
         return JsonResponse({"error": f"{Model.__name__} not found"}, status=404)
