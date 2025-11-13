@@ -23,4 +23,4 @@ def print_status(res, onlyError=False):
     elif 500 <= status_code <= 599:
         print_red(text)  # Red → server error
     else:
-        print_purple(text)
+        print_purple(text) # Purple → custom

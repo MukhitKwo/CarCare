@@ -11,7 +11,7 @@ client = genai.Client(api_key=settings.GEMINI_API_KEY)
 
 # TODO fix cache not saving betwen project restarts
 
-def geminiCronicIssues(car_model: str):
+def geminiCarCronicIssues(car_model: str):
 
     # cache
     car_safe = re.sub(r'[^a-zA-Z0-9]', '_', car_model)
@@ -58,7 +58,7 @@ def geminiCronicIssues(car_model: str):
 
         # data = {"message": "Hello", "status": "success"}
 
-        cache.set(cache_key, data, timeout=87000)  # cache 1 dia?
+        cache.set(cache_key, data, timeout=3600)  # cache 1 hora
         return data
 
     except (APIError, json.JSONDecodeError) as e:

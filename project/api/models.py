@@ -60,7 +60,7 @@ class Carro(models.Model):
     )
     transmissao = models.CharField("Transmissao", max_length=20, choices=TRANSMISSION_CHOICES)  # type: ignore
 
-    kilometragem = models.PositiveIntegerField("Kilometragem")  # type: ignore
+    quilometragem = models.PositiveIntegerField("Quilometragem")  # type: ignore
 
     ano_produzido = models.PositiveIntegerField("Ano Produzido")  # type: ignore
 
@@ -100,10 +100,10 @@ class Manutencao(models.Model):
 
     data = models.DateField("Dia da Manutenção", null=True, blank=True)  # type: ignore
 
-    kilometragem = models.PositiveIntegerField("Kilometragem")  # type: ignore
+    quilometragem = models.PositiveIntegerField("Quilometragem")  # type: ignore
 
     def __str__(self):
-        return f"({self.carro_id.modelo}) {self.nome} - {self.kilometragem}km"
+        return f"({self.carro_id.modelo}) {self.nome} - {self.quilometragem}km"
 
 
 class Cronico(models.Model):
@@ -116,7 +116,7 @@ class Cronico(models.Model):
 
     descricao = models.TextField("Descrição", blank=True, null=True)  # type: ignore
 
-    kilometragem = models.PositiveIntegerField("Kilometragem")  # type: ignore
+    quilometragem = models.PositiveIntegerField("Quilometragem")  # type: ignore
 
     SEVERIDADE_CHOICES = [
         ('nenhuma', 'Nenhuma'),
@@ -131,4 +131,8 @@ class Cronico(models.Model):
     resolvido = models.BooleanField(default=False)  # type: ignore
 
     def __str__(self):
-        return f"({self.carro_id.modelo}) {self.nome} - {self.kilometragem}km ({"Resolvido" if self.resolvido else "Severidade: " + self.severidade})"
+        return f"({self.carro_id.modelo}) {self.nome} - {self.quilometragem}km ({"Resolvido" if self.resolvido else "Severidade: " + self.severidade})"
+
+class Defenicoes(models.Model):
+
+    user = models.ForeignKey(Utilizador, on_delete=models.CASCADE)  # type: ignore #! chave estrangeira

@@ -3,7 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework import viewsets
 from .models import *
 from .serializers import *
-from .gemini import geminiCronicIssues
+from .gemini import geminiCarCronicIssues
 from .crud import crud
 
 
@@ -15,7 +15,7 @@ class CarroViewSet(viewsets.ModelViewSet):
 def getCarCronicIssues(request):
     car = request.GET.get("car")
     # print("Car:", car)
-    data = geminiCronicIssues(car)
+    data = geminiCarCronicIssues(car)
     if data is None:
         return JsonResponse({"error": "Failed to get car issues"}, status=500)
     return JsonResponse(data, safe=False, json_dumps_params={"ensure_ascii": False, "indent": 2})
