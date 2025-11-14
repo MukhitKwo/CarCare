@@ -27,7 +27,7 @@ class createCarroForm(forms.Form):
     )
     transmissao = forms.ChoiceField(label="Transmissao", choices=TRANSMISSION_CHOICES)
 
-    kilometragem = forms.IntegerField(label="Kilometragem", min_value=0)
+    quilometragem = forms.IntegerField(label="Kilometragem", min_value=0)
 
     ano_produzido = forms.IntegerField(label="Ano Produzido", min_value=0)
 

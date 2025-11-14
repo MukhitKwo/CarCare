@@ -1,28 +1,27 @@
 from django.db import models
+from django.conf import settings
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 
-class Utilizador(models.Model):
+# class Utilizador(models.Model):
 
-    user_id = models.AutoField(primary_key=True)  # type: ignore
+#     user_id = models.AutoField(primary_key=True)  # type: ignore
 
-    email = models.EmailField(unique=True)  # type: ignore
+#     email = models.EmailField(unique=True)  # type: ignore
 
-    username = models.CharField(max_length=50, unique=True)  # type: ignore
+#     username = models.CharField(max_length=50, unique=True)  # type: ignore
 
-    password = models.CharField(max_length=128)  # type: ignore  #! guardar encriptado
+#     password = models.CharField(max_length=128)  # type: ignore  #! guardar encriptado
 
-    criado_a = models.DateTimeField(auto_now_add=True)  # type: ignore
-
-    def __str__(self):
-        return self.username
+#     def __str__(self):
+#         return self.username
 
 
 class Garagem(models.Model):
 
     garagem_id = models.AutoField(primary_key=True)  # type: ignore
 
-    user = models.ForeignKey(Utilizador, on_delete=models.CASCADE)  # type: ignore #! chave estrangeira
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)  # type: ignore #! chave estrangeira
 
     nome = models.CharField("Nome", max_length=100)  # type: ignore
 
@@ -135,4 +134,4 @@ class Cronico(models.Model):
 
 class Defenicoes(models.Model):
 
-    user = models.ForeignKey(Utilizador, on_delete=models.CASCADE)  # type: ignore #! chave estrangeira
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)  # type: ignore #! chave estrangeira

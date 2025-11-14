@@ -23,6 +23,7 @@ def getCarCronicIssues(request):
 
 @csrf_exempt
 def tabelaCarro(request, id=None):
+    print(request.user.id)
     return crud(request, Carro, CarroSerializer, id)
 
 
@@ -34,4 +35,4 @@ def tabelaGaragem(request, id=None):
 
 @csrf_exempt
 def tabelaUtilizador(request, id=None):
-    return crud(request, Utilizador, UtilizadorSerializer, id)
+    return crud(request, User, UserSerializer, id)

@@ -56,7 +56,7 @@ def get_object(Model, Serializer, id):
 def update_object(request, Model, Serializer, id):
 
     if not id:  # sem id não há como atualizar
-        return JsonResponse({"error": f"Primary key required"}, status=400)
+        return JsonResponse({"error": f"ID required"}, status=400)
 
     try:
         pk_id = Model._meta.pk.name
@@ -76,7 +76,7 @@ def update_object(request, Model, Serializer, id):
 def delete_object(Model, id):
 
     if not id:  # sem id não há o que apagar
-        return JsonResponse({"error": f"Primary key required"}, status=400)
+        return JsonResponse({"error": f"ID required"}, status=400)
 
     try:
         pk_id = Model._meta.pk.name
