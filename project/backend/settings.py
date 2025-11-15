@@ -2,7 +2,8 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 import os
-
+import psycopg2
+from utils.colors import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -12,8 +13,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 dotenv_path = Path(__file__).resolve().parents[2] / ".env"
 load_dotenv(dotenv_path=dotenv_path)
 
-sb_user = os.getenv("SB_USER")
-sb_password = os.getenv("SB_PASSWORD")
+SB_USER = os.getenv("SB_USER")
+SB_PASSWORD = os.getenv("SB_PASSWORD")
+
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 
@@ -29,8 +31,6 @@ DEBUG = True
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']  # ! para permitir o proxy do react
 
 os.environ["DJANGO_RUNSERVER_HIDE_WARNING"] = "true"  # ! PARA PARAR DE MOSTAR "WARNING THIS IS DEVELOPMENT SERVER"
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -73,23 +73,46 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
+def canConnectPostgres():
+    if not all([SB_USER, SB_PASSWORD]):
+        print_yellow(f"[WARNING] Postgresql has no keys. Switching to sqlite3!")
+        return False
+    try:
+        conn = psycopg2.connect(
+            dbname="postgres",
+            user=SB_USER,
+            password=SB_PASSWORD,
+            host="aws-1-eu-west-1.pooler.supabase.com",
+            port=6543,
+            sslmode="require",
+            connect_timeout=3  # fail fast
+        )
+        conn.close()
+        return True
+    except Exception:
+        print_red(f"[FAIL] Postgresql connection failed. Switching to sqlite3!")
+        return False
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': sb_user,
-        'PASSWORD': sb_password,
-        'HOST': 'aws-1-eu-west-1.pooler.supabase.com',
-        'PORT': '6543',
-        'OPTIONS': {
-            'sslmode': 'require',
-        },
-        'CONN_MAX_AGE': 60,
+
+if canConnectPostgres():
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'postgres',
+            'USER': SB_USER,
+            'PASSWORD': SB_PASSWORD,
+            'HOST': "aws-1-eu-west-1.pooler.supabase.com",
+            'PORT': '6543',
+            'OPTIONS': {'sslmode': 'require'},
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': str(BASE_DIR / "db.sqlite3"),
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators

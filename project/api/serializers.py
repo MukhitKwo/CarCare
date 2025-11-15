@@ -33,3 +33,9 @@ class CronicoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cronico
         fields = '__all__'
+
+
+class DefenicoesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Defenicoes
+        fields = '__all__'

@@ -1,3 +1,2 @@
 salvar o cache dos pedidos ao gemini entre projects restarts
-check if database is online when starting (display error if not instant of crash)
 get guilherme's ui for demo
